@@ -1,9 +1,8 @@
-class My::RecipesController < ApplicationController
+class My::RecipesController < My::BaseController
   # TODO: extract to base controller
-  before_action :require_login
 
   def new
-    @recipe = Recipe.new
+    @recipe = Recipe.new #(ingredients: [Ingredient.new])
   end
 
   def create
@@ -23,6 +22,7 @@ class My::RecipesController < ApplicationController
 
   def update
     recipe = find_recipe
+
     if recipe.update(recipe_params)
       redirect_to recipe, notice: t(".updated")
     else
@@ -36,6 +36,9 @@ class My::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:title, :description)
+    params.require(:recipe)
+      .permit(:title,
+              :description,
+              ingredients_attributes: [:id, :name, :_destroy])
   end
 end

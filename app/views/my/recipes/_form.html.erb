@@ -8,7 +8,20 @@
       <%= form.label :description %>
       <%= form.text_field :description %>
     </div>
+    <br>
+
+    <fieldset>
+      <legend>Ingredients</legend>
+      <%= form.fields_for(:ingredients) do |ingredients_form| %>
+          <%= render "ingredient_fields", form: ingredients_form %>
+      <% end %>
+      <br>
+      <%= link_to_add_nested t(".add_ingredients"), form, :ingredients %>
+    </fieldset>
+    <br>
+
     <div>
       <%= form.submit "Submit" %>
     </div>
+
 <% end %>

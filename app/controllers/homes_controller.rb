@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
   def show
-    @recipe = Recipe.all
+    @recipes = Recipe.latest.page(params[:page]).per 1
   end
 end
