@@ -20,6 +20,15 @@
     </fieldset>
     <br>
 
+    <fieldset>
+      <legend>Steps</legend>
+      <%= form.fields_for(:steps) do |steps_form| %>
+          <%= render "step_fields", form: steps_form %>
+      <% end %>
+      <%= link_to_add_nested t(".add_steps"), form, :steps %>
+    </fieldset>
+    <br>
+
     <div>
       <%= form.submit "Submit" %>
     </div>

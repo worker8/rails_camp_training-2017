@@ -49,3 +49,7 @@ en:
   recipes:
     show;
       confirm_delete "are you sure you wanna delete?"
+  my:
+    recipes:
+      form:
+        add_ingredients: "Add ingredients"
