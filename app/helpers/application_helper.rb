@@ -12,4 +12,16 @@ module ApplicationHelper
 
     link_to text, "#", data: {role: "add-nested", template: template}
   end
+
+  def avatar (user)
+    image_tag "http://pix.iemoji.com/images/emoji/apple/8.3/256/weary-cat-face.png", class: "avatar"
+  end
+
+  def follow_button(user)
+    if current_user.follows?(user)
+      button_to t("unfollow"), [:unfollow, user]
+    else
+      button_to t("follow"), [:follow, user]
+    end
+  end
 end

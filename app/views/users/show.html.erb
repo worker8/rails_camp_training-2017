@@ -1,3 +1,21 @@
 <%= t(".users_recipes", username: @user.username) %>
 
-<%= render @recipes %>
+<div>
+  <h1>
+    (^3^)
+    <%= t(".users_recipes", username: @user.username) %>
+  </h1>
+  <% if current_user != @user %>
+      <%= follow_button @user %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <div>
+    <fieldset>
+      <legend>list of recipes</legend>
+      <%= render @recipes %>
+    </fieldset>
+  </div>
+</div>

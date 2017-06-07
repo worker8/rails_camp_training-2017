@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   # get "/" => "homes#show" # same as above, but above is preferred
 
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show] do
+    member do
+      post "follow" => "follows#create"
+      post "unfollow" => "follows#destroy"
+    end
+  end
   resources :recipes, only: [:show]
   namespace :my do
     resources :recipes, only: %i(new create edit destroy update)
