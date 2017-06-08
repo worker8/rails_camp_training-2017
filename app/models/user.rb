@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
            dependent: :destroy
   has_many :bookmarked_recipes, through: :bookmarked_recipe_relationships, source: :recipe
 
+  has_many :feed_items, dependent: :destroy
+
   def owns?(object)
     object.user_id == id
   end
@@ -56,7 +58,10 @@ class User < ActiveRecord::Base
   end
 
   def bookmarks(recipe)
-    bookmarked_recipes << recipe
+    # bookmarked_recipes << recipe
+    bookmarked_recipe_relationships.find_or_create_by(recipe: recipe)
+  rescue ActiveRecord::RecordNotUnique
+    retry
   end
 
   def unbookmarks(recipe)

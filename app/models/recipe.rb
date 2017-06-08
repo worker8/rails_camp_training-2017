@@ -8,6 +8,8 @@ class Recipe < ApplicationRecord
 
   # has_many :recipe_comment_relationship, class_name: "Comment", dependent: :destroy
   has_many :comments, dependent: :destroy #, through: :recipe_comment_relationship
+  has_many :bookmarks, dependent: :destroy
+  has_many :user_activities, as: :target, dependent: :destroy
 
   # has_many :liked_recipe_relationships,
   #          class_name: "Like"

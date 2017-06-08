@@ -2,7 +2,8 @@ class BookmarksController < ApplicationController
   before_action :require_login
 
   def create
-    current_user.bookmarks(recipe_to_bookmark)
+    RecipeBookmarking.new(user: current_user, recipe: recipe_to_bookmark).run
+    # current_user.bookmarks(recipe_to_bookmark)
     redirect_to recipe_to_bookmark
   end
 
