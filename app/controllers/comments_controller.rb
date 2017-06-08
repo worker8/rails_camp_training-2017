@@ -3,9 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     # current_user.comments.build(comments_params)
-    _comment = current_user.comment_on(recipe, params[:comment][:text])
-    UserActivityPublisher.new(user: current_user, target: _comment, type: "comment").run
-
+    RecipeCommenting.new(user: current_user, recipe: recipe, comment_text: params[:comment][:text]).run
     redirect_to recipe
 
     # if @recipe.save
