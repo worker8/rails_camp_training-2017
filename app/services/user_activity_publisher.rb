@@ -24,7 +24,8 @@ class UserActivityPublisher
 
   ACTIVITY_MAP = {
     bookmark: BookmarkActivity,
-    like: LikeActivity
+    like: LikeActivity,
+    comment: CommentActivity
   }.freeze
 
   def get_activity

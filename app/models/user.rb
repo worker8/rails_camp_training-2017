@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
     comment.recipe = recipe
     comment.text = comment_text
     comment.save
+    comment
   end
 
 end

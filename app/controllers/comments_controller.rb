@@ -2,8 +2,10 @@ class CommentsController < ApplicationController
   before_action :require_login
 
   def create
-    # comment = current_user.comments.build(comments_params)
-    current_user.comment_on(recipe, params[:comment][:text])
+    # current_user.comments.build(comments_params)
+    _comment = current_user.comment_on(recipe, params[:comment][:text])
+    UserActivityPublisher.new(user: current_user, target: _comment, type: "comment").run
+
     redirect_to recipe
 
     # if @recipe.save
