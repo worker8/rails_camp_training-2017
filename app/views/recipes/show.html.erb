@@ -1,6 +1,10 @@
 <h1>
   <%= @recipe.title %>
 </h1>
+
+<%= like_button @recipe %>
+<%= bookmark_button @recipe %>
+
 <% if @recipe.description.present? %>
     <p><%= @recipe.description %></p>
 <% end %>
@@ -9,7 +13,16 @@
 
 <%= render "ingredients", recipe: @recipe %>
 <%= render "steps", recipe: @recipe %>
+<%= render "comments", recipe: @recipe %>
 
+<%= form_for [@recipe, @recipe.comments.new] do |form| %>
+    <%= render "comment_fields", form: form %>
+
+    <div>
+      <%= form.submit t(".comment") %>
+    </div>
+<% end %>
+<br>
 <% if current_user.owns?(@recipe) %>
     <%= render "controls", recipe: @recipe %>
 <% end %>

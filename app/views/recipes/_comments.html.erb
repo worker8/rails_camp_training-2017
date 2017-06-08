@@ -1,0 +1,12 @@
+<h2>Comments</h2>
+<ol>
+  <% recipe.comments.each do |comment| %>
+      <li>
+        <%= "#{comment.text} by #{comment.user.email}" %>
+      </li>
+      <% if current_user.owns?(comment) %>
+          <%= link_to t(".delete_comment"), [recipe, comment], method: :delete %>
+
+      <% end %>
+  <% end %>
+</ol>

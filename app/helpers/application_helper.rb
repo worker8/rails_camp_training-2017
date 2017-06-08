@@ -24,4 +24,5 @@ module ApplicationHelper
       button_to t("follow"), [:follow, user]
     end
   end
+
 end

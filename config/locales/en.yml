@@ -37,6 +37,10 @@ en:
   my_recipe: "My Recipes"
   follow: "follow"
   unfollow: "unfollow"
+  like: "like"
+  unlike: "unlike"
+  bookmark: "bookmark"
+  unbookmark: "unbookmark"
 
   helpers:
     submit:
@@ -49,8 +53,11 @@ en:
     show:
       users_recipes: "%{username}'s recipes"
   recipes:
-    show;
-      confirm_delete "are you sure you wanna delete?"
+    show:
+      confirm_delete: "are you sure you wanna delete?"
+      comment: "Comment"
+    comments:
+      delete_comment: "Delete Comment"
   my:
     recipes:
       form:
