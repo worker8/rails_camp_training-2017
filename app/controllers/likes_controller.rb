@@ -2,7 +2,8 @@ class LikesController < ApplicationController
   before_action :require_login
 
   def create
-    current_user.likes(recipe_to_like)
+    RecipeLiking.new(user: current_user, recipe: recipe_to_like).run
+    # current_user.likes(recipe_to_like)
     redirect_to recipe_to_like
   end
 

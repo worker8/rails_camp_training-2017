@@ -23,7 +23,8 @@ class UserActivityPublisher
   attr_reader :user, :target, :type
 
   ACTIVITY_MAP = {
-    bookmark: BookmarkActivity
+    bookmark: BookmarkActivity,
+    like: LikeActivity
   }.freeze
 
   def get_activity

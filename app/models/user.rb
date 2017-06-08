@@ -50,7 +50,9 @@ class User < ActiveRecord::Base
   end
 
   def likes(recipe)
-    liked_recipes << recipe
+    liked_recipe_relationships.find_or_create_by(recipe: recipe)
+  rescue ActiveRecord::RecordNotUnique
+    retry
   end
 
   def unlikes(recipe)
