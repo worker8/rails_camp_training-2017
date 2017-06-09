@@ -45,6 +45,6 @@ class My::RecipesController < My::BaseController
               :description,
               :image,
               ingredients_attributes: [:id, :name, :_destroy],
-              steps_attributes: [:id, :name, :_destroy])
+              steps_attributes: [:id, :name, :image, :_destroy])
   end
 end

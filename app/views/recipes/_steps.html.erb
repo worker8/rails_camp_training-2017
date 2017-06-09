@@ -3,6 +3,7 @@
   <% recipe.steps.each do |step| %>
       <li>
         <%= step.name %>
+        <%= image_tag step.image.url(:thumb) %>
       </li>
   <% end %>
 </ol>
