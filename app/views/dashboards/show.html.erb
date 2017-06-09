@@ -1,3 +1,10 @@
+<div class="search-form">
+  <%= form_for :search, url: search_path, method: :get do |form| %>
+  <%= form.text_field :query, placeholder: t(".search_here") %>
+  <%= form.submit %>
+  <% end %>
+</div>
+
 <% @feed_items.each do |feed_item| %>
     <%= render "feed_item", feed_item: feed_item %>
 <% end %>

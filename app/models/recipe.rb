@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
 
   # has_many :recipe_comment_relationship, class_name: "Comment", dependent: :destroy
+  has_one :search_index, dependent: :destroy
   has_many :comments, dependent: :destroy #, through: :recipe_comment_relationship
   has_many :bookmarks, dependent: :destroy
   has_many :user_activities, as: :target, dependent: :destroy
@@ -30,7 +31,26 @@ class Recipe < ApplicationRecord
 
   scope :latest, -> { order(created_at: :desc) }
 
-  # def self.latest
-  #   order(created_at: :desc)
-  # end
+  # SEARCH_QUERY_MAP = {
+  #   "title","ingredients"
+  # }
+  # scope :search_ingredients, ->(query:) { where("title LIKE ?", "%#{query}%") }
+
+  def self.search2(query)
+    results1 = Recipe.where("title LIKE ?", "%#{query}%")
+
+    results2 = Recipe.all.map do |recipe|
+      r = recipe.ingredients.where("name LIKE ?", "%#{query}%")
+      if r.count > 0
+        recipe
+      end
+    end
+    (results1 + results2).uniq.compact
+
+  end
+
+  def self.latest
+    #   order(created_at: :desc)
+    # end
+  end
 end

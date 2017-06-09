@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
+  resource :search, only: %i(show)
+
   resources :recipes, only: [:show] do
     member do
       post "like" => "likes#create"

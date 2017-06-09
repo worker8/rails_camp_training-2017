@@ -5,17 +5,17 @@ class RecipePublishing
   end
 
   def run
-    recipe = publish_recipe
-    if recipe.save
-      publish_activity(recipe)
+    build_recipe.tap do |recipe|
+      if recipe.save
+        publish_activity(recipe)
+      end
     end
-    recipe
   end
 
   private
   attr_reader :user, :recipe_params
 
-  def publish_recipe
+  def build_recipe
     user.recipes.build(recipe_params)
   end
 
