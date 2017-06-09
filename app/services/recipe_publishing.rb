@@ -21,5 +21,6 @@ class RecipePublishing
 
   def publish_activity(recipe)
     UserActivityPublisher.new(user: user, target: recipe, type: "publish_recipe").run
+    RecipeIndexer.new(recipe).run
   end
 end

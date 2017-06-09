@@ -25,9 +25,9 @@ class My::RecipesController < My::BaseController
   end
 
   def update
-    recipe = find_recipe
+    recipe = RecipeUpdater.new(recipe: find_recipe, recipe_params: recipe_params).run
 
-    if recipe.update(recipe_params)
+    if recipe.persisted?
       redirect_to recipe, notice: t(".updated")
     else
 
