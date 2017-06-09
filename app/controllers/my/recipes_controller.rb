@@ -43,6 +43,7 @@ class My::RecipesController < My::BaseController
     params.require(:recipe)
       .permit(:title,
               :description,
+              :image,
               ingredients_attributes: [:id, :name, :_destroy],
               steps_attributes: [:id, :name, :_destroy])
   end

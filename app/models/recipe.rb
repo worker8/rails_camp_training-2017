@@ -1,4 +1,7 @@
 class Recipe < ApplicationRecord
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/normal/grumpy_cat.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
   validates :title, presence: true
   validates :ingredients, length: {minimum: 1}
   validates :steps, length: {minimum: 1}
