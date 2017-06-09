@@ -6,9 +6,8 @@ class My::RecipesController < My::BaseController
   end
 
   def create
-    @recipe = current_user.recipes.build(recipe_params)
-    if @recipe.save
-      UserActivityPublisher.new(user: current_user, target: @recipe, type: "publish_recipe").run
+    @recipe = RecipePublishing.new(user: current_user, recipe_params: recipe_params).run #current_user.recipes.build(recipe_params)
+    if @recipe.persisted?
       redirect_to @recipe
     else
       render :edit
