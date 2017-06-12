@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create], raise: false
+  # skip_before_action :require_login, only: [:new, :create], raise: false
 
   def show
     @user = User.find(params[:id])
@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :username)
+    params.require(:user).permit(:email, :password, :username, :avatar)
   end
 end

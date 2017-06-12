@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" }, default_url: "/images/normal/grumpy_cat.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true

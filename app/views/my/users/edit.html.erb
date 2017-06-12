@@ -1,0 +1,6 @@
+<%= form_for @user, url: my_user_path(@user) do |form| %>
+    <%= render "users/form", user: @user, form: form %>
+    <div>
+      <%= form.submit "Update" %>
+    </div>
+<% end %>

@@ -1,7 +1,9 @@
 <header>
+  <fieldset>
   <nav>
     <% if signed_in? %>
-        <%= current_user.username %>
+        <%= image_tag current_user.avatar.url(:thumb) %>
+        <%= link_to current_user.username, [:edit, :my, current_user]%>
         <%= link_to t("my_recipes"), current_user %>
         <%= link_to t("sign_out"), session_path, method: :delete %>
     <% else %>
@@ -10,4 +12,5 @@
     <% end %>
     <br><br>
   </nav>
+  </fieldset>
 </header>

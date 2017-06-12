@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   namespace :my do
     resources :recipes, only: %i(new create edit destroy update)
+    resources :users, only: [:edit, :update]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
