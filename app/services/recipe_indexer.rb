@@ -9,7 +9,6 @@ class RecipeIndexer
     else
       create_index
     end
-
   end
 
 

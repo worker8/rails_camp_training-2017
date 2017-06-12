@@ -5,9 +5,23 @@ class UserActivityPublisher
     @target = target
   end
 
-  def run
-    return if user.followers.none?
+  def run(delay: true)
+    return if @user.followers.none?
+    if delay
+      create_delayed_job
+    else
+      perform_publish
+    end
+  end
 
+  private
+  attr_reader :user, :target, :type
+
+  def create_delayed_job
+    UserActivityPublisherJob.perform_later(user, type, target)
+  end
+
+  def perform_publish
     activity = get_activity
     if activity.new_record?
       begin
@@ -18,9 +32,6 @@ class UserActivityPublisher
       publish_activity(activity)
     end
   end
-
-  private
-  attr_reader :user, :target, :type
 
   ACTIVITY_MAP = {
     bookmark: BookmarkActivity,
