@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/normal/grumpy_cat.png"
+  has_attached_file :image, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: "/images/normal/grumpy_cat.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   validates :title, presence: true
@@ -51,9 +51,4 @@ class Recipe < ApplicationRecord
     (results1 + results2).uniq.compact
 
   end
-
-  # def self.latest
-    #   order(created_at: :desc)
-    # end
-  # end
 end
