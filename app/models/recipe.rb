@@ -52,8 +52,8 @@ class Recipe < ApplicationRecord
 
   end
 
-  def self.latest
+  # def self.latest
     #   order(created_at: :desc)
     # end
-  end
+  # end
 end
