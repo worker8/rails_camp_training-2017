@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" }, default_url: "/images/normal/grumpy_cat.png"
+  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "50x50>"}, default_url: "/images/normal/grumpy_cat.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :email, presence: true, uniqueness: true
@@ -11,13 +11,15 @@ class User < ActiveRecord::Base
   has_many :followed_user_relationships,
            foreign_key: :follower_id,
            class_name: "Follow",
-           dependent: :destroy
+           dependent: :destroy,
+           :counter_cache => :followed_users_count
   has_many :followed_users, through: :followed_user_relationships
 
   has_many :follower_relationships,
            foreign_key: :followed_user_id,
            class_name: "Follow",
-           dependent: :destroy
+           dependent: :destroy,
+           :counter_cache => :followers_count
   has_many :followers, through: :follower_relationships
 
   has_many :liked_recipe_relationships,
