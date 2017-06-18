@@ -28,22 +28,8 @@ RSpec.describe "Recipe#destroy", :type => :request do
 
     delete "/api/recipes/#{recipe.id}", :params => {
     }
-
     expect(response.status).to eq(401)
     expect(Recipe.count).to eq(1)
   end
 
-  private
-
-  def create_user
-    user = create(:user)
-    credential = create(:credential, user: user)
-    return [user, credential]
-  end
-
-  def create_recipe
-    user, credential = create_user
-    recipe = create(:recipe, user: user)
-    return [recipe, credential.access_token]
-  end
 end

@@ -49,7 +49,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :recipes, only: %i(index create destroy)
-    resources :users, only: %i(create)
+    resources :users, only: %i(create) do
+      member do
+        post "follow" => "follows#create"
+        post "unfollow" => "follows#destroy"
+      end
+    end
     resource :credentials, only: %i(create)
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,6 +1,6 @@
 class Api::RecipesController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :require_access_token
+  before_action :require_access_token, except: :index
 
   PER_PAGE_NUMBER = 5.freeze
 
@@ -10,12 +10,11 @@ class Api::RecipesController < ApplicationController
   end
 
   def create
-    # recipe = current_user.recipes.create(recipe_params)
     recipe = RecipePublishing.new(user: current_user, recipe_params: recipe_params).run
     if recipe.persisted?
       render json: recipe, status: :ok
     else
-      render json: recipe, status: bad_request
+      render json: recipe, status: :bad_request
     end
   end
 
@@ -35,21 +34,6 @@ class Api::RecipesController < ApplicationController
 
   def page_number
     params[:page] || 1
-  end
-
-  def require_access_token
-    if !params[:access_token].present?
-      render status: :unauthorized, json: {}
-      return
-    end
-
-    credential = Credential.find_by(access_token: params[:access_token])
-    if !credential.present?
-      render status: :forbidden, json: {}
-      return
-    end
-
-    @current_user = credential.user
   end
 
   def find_recipe
