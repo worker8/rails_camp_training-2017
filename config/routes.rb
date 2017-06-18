@@ -48,7 +48,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :recipes, only: %i(index)
+    resources :recipes, only: %i(index create)
+    resources :users, only: %i(create)
+    resource :credentials, only: %i(create)
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

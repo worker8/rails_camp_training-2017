@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612045407) do
+ActiveRecord::Schema.define(version: 20170613051345) do
 
   create_table "bookmarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20170612045407) do
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "access_token", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_token"], name: "index_credentials_on_access_token", unique: true
+    t.index ["user_id"], name: "index_credentials_on_user_id"
   end
 
   create_table "feed_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 20170612045407) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users"
+  add_foreign_key "credentials", "users"
   add_foreign_key "feed_items", "user_activities"
   add_foreign_key "feed_items", "users"
   add_foreign_key "follows", "users", column: "followed_user_id"

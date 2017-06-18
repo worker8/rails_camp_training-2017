@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
 
   has_many :recipes, dependent: :destroy
+  has_many :credentials, dependent: :destroy
 
   has_many :followed_user_relationships,
            foreign_key: :follower_id,
