@@ -13,9 +13,9 @@ class Api::RecipesController < ApplicationController
     # recipe = current_user.recipes.create(recipe_params)
     recipe = RecipePublishing.new(user: current_user, recipe_params: recipe_params).run
     if recipe.persisted?
-      render json: recipe, status: 200
+      render json: recipe, status: :ok
     else
-      render json: recipe, status: 400
+      render json: recipe, status: bad_request
     end
   end
 
@@ -25,9 +25,9 @@ class Api::RecipesController < ApplicationController
 
     if recipe
       recipe.destroy
-      render json: {}, status: 200
+      render json: {}, status: :ok
     else
-      render json: {}, status: 400
+      render json: {}, status: :bad_request
     end
   end
 
@@ -39,13 +39,13 @@ class Api::RecipesController < ApplicationController
 
   def require_access_token
     if !params[:access_token].present?
-      render status: 401, json: {}
+      render status: :unauthorized, json: {}
       return
     end
 
     credential = Credential.find_by(access_token: params[:access_token])
     if !credential.present?
-      render status: 403, json: {}
+      render status: :forbidden, json: {}
       return
     end
 

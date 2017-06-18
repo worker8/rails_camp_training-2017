@@ -18,3 +18,6 @@ feed
 
 comment
 - comment recipe
+
+search
+- search recipe

@@ -6,9 +6,9 @@ class Api::UsersController < ApplicationController
 
     if user.valid?
       credential = CredentialCreation.new(user: user).run
-      render status: 200, json: credential.access_token
+      render status: :ok, json: credential.access_token
     else
-      render status: 400, json: {}
+      render status: :bad_request, json: {}
     end
   end
 

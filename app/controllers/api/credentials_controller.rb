@@ -3,16 +3,16 @@ class Api::CredentialsController < ApplicationController
 
   def create
     if invalid_params?
-      render status: 400, json: {}
+      render status: :bad_request, json: {}
       return
     end
 
     user = authenticate_session(credential_params)
     if user
       credential = CredentialCreation.new(user: user).run
-      render status: 200, json: credential.access_token
+      render status: :ok, json: credential.access_token
     else
-      render status: 401, json: {}
+      render status: :unauthorized, json: {}
     end
   end
 
