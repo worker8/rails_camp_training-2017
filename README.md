@@ -10,14 +10,18 @@ users
 - unfollow users
 
 recipe:
-- CRUD recipe
-- like recipe
+- index recipe
+- create recipe
+- destroy recipe
+- get 1 recipe (not yet)
+- update recipe (not yet)
+- like recipe (not yet)
 
 feed
-- GET home feed
+- GET home feed (not yet)
 
 comment
-- comment recipe
+- comment recipe (not yet)
 
 search
-- search recipe
+- search recipe (not yet)
