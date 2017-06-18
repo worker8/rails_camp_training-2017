@@ -19,6 +19,18 @@ class Api::RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    require_access_token
+    recipe = find_recipe
+
+    if recipe
+      recipe.destroy
+      render json: {}, status: 200
+    else
+      render json: {}, status: 400
+    end
+  end
+
   private
 
   def page_number
@@ -38,6 +50,11 @@ class Api::RecipesController < ApplicationController
     end
 
     @current_user = credential.user
+  end
+
+  def find_recipe
+    recipe = @current_user.recipes.find_by(id: params[:id])
+    return recipe
   end
 
   def recipe_params

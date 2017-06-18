@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :recipes, only: %i(index create)
+    resources :recipes, only: %i(index create destroy)
     resources :users, only: %i(create)
     resource :credentials, only: %i(create)
   end

@@ -1,24 +1,20 @@
-# README
+### Overview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an exercise done in a rails workshop.
 
-Things you may want to cover:
 
-* Ruby version
+# API
+users
+- create users
+- follow users
+- unfollow users
 
-* System dependencies
+recipe:
+- CRUD recipe
+- like recipe
 
-* Configuration
+feed
+- GET home feed
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+comment
+- comment recipe

@@ -15,6 +15,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 # Monban.test_mode!
 require 'database_cleaner'
+require 'byebug'
 
 RSpec.configure do |config|
   # monban stuff
