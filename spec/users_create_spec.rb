@@ -3,34 +3,22 @@ require "rails_helper"
 RSpec.describe "User#create", :type => :request do
 
   it "should return 400, when username is missing" do
-    user_params_with_username_missing = user_params.tap do |obj|
-      obj.delete(:username)
-    end
-
     post "/api/users", :params => {
-      :user => user_params_with_username_missing
+      :user => user_params_without(:username)
     }
     expect(response.status).to eq(400)
   end
 
   it "should return 400, when email is missing" do
-    user_params_with_email_missing = user_params.tap do |obj|
-      obj.delete(:email)
-    end
-
     post "/api/users", :params => {
-      :user => user_params_with_email_missing
+      :user => user_params_without(:email)
     }
     expect(response.status).to eq(400)
   end
 
   it "should return 400, when password is missing" do
-    user_params_with_password_missing = user_params.tap do |obj|
-      obj.delete(:password)
-    end
-
     post "/api/users", :params => {
-      :user => user_params_with_password_missing
+      :user => user_params_without(:password)
     }
     expect(response.status).to eq(400)
   end
@@ -54,4 +42,11 @@ RSpec.describe "User#create", :type => :request do
       :password => "my_password"
     }
   end
+
+  def user_params_without(to_be_removed)
+    user_params.tap do |obj|
+      obj.delete(to_be_removed)
+    end
+  end
+
 end

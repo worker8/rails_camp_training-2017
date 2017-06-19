@@ -8,5 +8,5 @@ FactoryGirl.define do
 
   sequence(:email) { |n| "#{n}@cookpad.com" }
   sequence(:username) { |n| "#{n}_chef" }
-  sequence(:password_digest) { |n| "#{n}" }
+  sequence(:password_digest) { |n| "#{n}password_digest" }
 end
